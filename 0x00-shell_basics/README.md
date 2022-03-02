@@ -1,14 +1,14 @@
 ##Shell Scripting Basics Exercises
 
-I task that I loved and challenged me well throughout, below are some important commands to know when using Linux
+I task that I loved and challenged me well throughout, below are some important commands to know when using Linux.
 
-**Task 0**:'pwd' for the print working directory
+**Task 0**: 'pwd' for the print working directory
 
-**Task 1**:'ls' is used to list directory contents
+**Task 1**: 'ls' is used to list directory contents
 
-**Task 2**:'cd' is for change directory to home
+**Task 2**: 'cd' is for change directory to home
 
-**Task 3**:'ls -l' list directory contents in long form
+**Task 3**: 'ls -l' list directory contents in long form
 
 **Task 4**: 'ls -al' more detailed list with hidden files and parent directories
 
@@ -46,52 +46,32 @@ I task that I loved and challenged me well throughout, below are some important 
   'ln -s /bin/ls __ls__'
   Create a symbolic link named __ls__ for /bin/ls
 
-Exercise 14:
-  cp -u *.html ..
+**Task 14**:
+  'cp -u *.html ..'
   Copy all html files from the current directory to the parent directory, but only copy files that didn't exist in the parent directory or are newer versions than the ones that already exist in the parent directory.
-  The -u option didn't show on the terminal manual page. The -u option copies the file into the directory if its a newer version. If the file doesn't exist in the directory, it will copy over.
-  The -n option works for copying files that don't exist in the parent directory, but it doesn't check if the file is a newer version or not.
 
-Exercise 15:
-  mv [[:upper:]]* /tmp/u
+**Task 15**:
+  'mv [[:upper:]]* /tmp/u'
   Move all files that begin with a capital letter to /tmp/u
 
-Exercise 16:
-  rm *~
+**Task 16**:
+  'rm *~'
   Deletes all files in the current directory that end with a ~
 
-Exercise 17:
-  mkdir -p welcome/to/holberton
-  Create directory `welcome` in current directory. Create directory `to` inside directory `welcome`. Create directory `holberton` inside directory `to`.
+**Task 17**:
+  'mkdir -p welcome/to/school'
   The -p option creates any intermediate directories in the path argument.
 
-Exercise 18:
-  ls -pam
-  List all files and directories of the current directory, separated by commas. Directory names should end with a `/`. The listing should be alph ordered, except for dot (.) or dot dot (..), which should be listed at the beginning.
-  The -a option is to show any hidden files.
-  The -p option writes a `/` at the end of directory names.
-  The -m option streams the output, separating each listing with commas.
+**Task 18**:
+  'ls -al -m --indicator-style=slash -v -c'
+  The -al was for List all files and directories of the current directory
+  The -m was to separated by commas.
+  THe --indicator-style=slash was to show Directory names  with a `/`.
+  The -v was The listing should be alph ordered, except for dot (.) or dot dot (..), which should be listed at the beginning.
+  The -c option is to show any hidden the numbers in order
 
-Exercise 19:
-  0 string HOLBERTON Holberton data
-  !:mime Holberton
-  Create a magic file called `holberton.mgc` that can be used with the command `file` to detect `Holberton` data files. Holberton data files always contain "HOLBERTON" at offset 0.
+**Task 19**:
+  0   string  SCHOOL School data
+  !:mime  School
 
-  This exercise was much different from the previous exercises. From what I understand, the magic file is used to detect patterns in files and will give a specified output depending on a matching pattern.
-  The first argument is a number representing the offset.
-  The second argument is the data type you are searching for. In our case, it is a string.
-  The third argument is the data you are searching for. In our case, "HOLBERTON", which we specified as a string in the second argument.
-  The fourth argument is the message you want to output on match. If the search matches, it will output this message.
-  The last argument is separated by a line. Since the fourth argument can be long and contain multiple strings, we separate the fourth and fifth arguments with this new line. This last argument can be multiple different things. In this case, a MIME type.
-  According to bash manual, a "MIME type is given on a separate line, which must be the next non-blank or comment line after the magic line that identifies the file type".
-  I knew to search for a MIME type because the example provided:
-  $ file --mime-type -m holberton.mgc *
-  The above returns message "Holberton" when matching a MIME ?? Not exactly sure, but this is what I can tell from what I've tested out and can see from the output and examples.
-  $ file -m holberton.mgc *
-  The above will return message "Holberton data" for any offset 0 "HOLBERTON" matches.
-  A cool thing to note is that the `file` command is compiling and running the magic file. So there is no need to compile to magic "permanently".
-  NOTE: Compiling a magic source file:
-  $ file -C -m <filename>.mgc
-  This produces the compiled magic file.
-  $ file -i -m <filename>.mgc *
-  This allows you to use the compiled file by specifying its name using the -m switch again.
+  Create a file called `school` that can be used with the command `file` to detect `School` data files. School data files that contain "SCHOOL" at offset 0.
