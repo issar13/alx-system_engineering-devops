@@ -1,2 +1,3 @@
 #!/bin/bash
 ls -al -m --indicator-style=slash -v -c
+
