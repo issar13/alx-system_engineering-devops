@@ -1,2 +1,2 @@
-#!/bin/bax
+#!/bin/bash
 rm *~*
