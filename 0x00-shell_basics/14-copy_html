@@ -1,2 +1,2 @@
 #!/bin/bash
-echo "stop.html"
+cp -n *.html ..
