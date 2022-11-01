@@ -1,72 +1,41 @@
 #!/usr/bin/python3
-"""
-Function that queries the Reddit API and prints
-the top ten hot posts of a subreddit
-"""
-import re
+"""GET to api"""
 import requests
-import sys
 
 
-def add_title(dictionary, hot_posts):
-    """ Adds item into a list """
-    if len(hot_posts) == 0:
-        return
-
-    title = hot_posts[0]['data']['title'].split()
-    for word in title:
-        for key in dictionary.keys():
-            c = re.compile("^{}$".format(key), re.I)
-            if c.findall(word):
-                dictionary[key] += 1
-    hot_posts.pop(0)
-    add_title(dictionary, hot_posts)
-
-
-def recurse(subreddit, dictionary, after=None):
-    """ Queries to Reddit API """
-    u_agent = 'Mozilla/5.0'
-    headers = {
-        'User-Agent': u_agent
-    }
-
-    params = {
-        'after': after
-    }
-
-    url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
-    res = requests.get(url,
-                       headers=headers,
-                       params=params,
-                       allow_redirects=False)
-
-    if res.status_code != 200:
+def recurse(subreddit, word_list, after="", dic={}):
+    """recursive function"""
+    base_url = 'https://www.reddit.com/r/{}/hot.json'.format(subreddit)
+    h = {'User-Agent': 'Reddit API test'}
+    params = {'limit': 200, 'after': after}
+    r = requests.get(base_url, headers=h, allow_redirects=False, params=params)
+    if r.status_code != 200:
         return None
-
-    dic = res.json()
-    hot_posts = dic['data']['children']
-    add_title(dictionary, hot_posts)
-    after = dic['data']['after']
-    if not after:
-        return
-    recurse(subreddit, dictionary, after=after)
+    d = r.json()
+    if after is None:
+        return dic
+    l = d.get('data', {}).get('children')
+    for i in l:
+        title = i.get('data', {}).get('title').lower().split()
+        for j in word_list:
+            for t in title:
+                if j == t:
+                    if j not in dic:
+                        dic[j] = 1
+                    else:
+                        dic[j] += 1
+    p = d.get('data', {}).get('after')
+    return recurse(subreddit, word_list, p, dic)
 
 
 def count_words(subreddit, word_list):
-    """ Init function """
-    dictionary = {}
-
-    for word in word_list:
-        dictionary[word] = 0
-
-    recurse(subreddit, dictionary)
-
-    l = sorted(dictionary.items(), key=lambda kv: kv[1])
-    l.reverse()
-
-    if len(l) != 0:
-        for item in l:
-            if item[1] is not 0:
-                print("{}: {}".format(item[0], item[1]))
-    else:
-        print("")
+    """Cound # of keywords"""
+    for i, e in enumerate(word_list):
+        word_list[i] = e.lower()
+    d = recurse(subreddit, word_list)
+    if d:
+        for key, value in sorted(d.items(), key=lambda x: (-x[1], x[0])):
+            print("{}: {}".format(key, value))
+    elif d is None:
+        print()
+        
