@@ -1,7 +1,7 @@
 <img src=./image.jpeg width=50%>
 
 # Wajakoya Inc requests failure report
-Last week, it was reported that our platform was returning 402 Error on all requests made on the platform routes, all the services were down.  Nearly all of the users were affected. The root cause was due to an overload on our servers due to an influx on users due to the release of a new feauture. 
+Last week, it was reported that our platform was returning 402 Error on all requests made on the platform routes, all the services were down.  Nearly all of the users were affected. The root cause was due to an overload on our servers due to an influx on users due to the release of a new feature. 
 
 ## Timeline
 The error was realized on Saturday 20th March 04:20 pm (East Africa Time) when our Backend Engineer, saw the master server receiving several requests. There was an emergency meeting called for clearance from several departments to purchase and manage the influx of use and solve the inaccessibility of the site. The problem was solved by Sunday 20th March 2004 hours (East Africa Time).
